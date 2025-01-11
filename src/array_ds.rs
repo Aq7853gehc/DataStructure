@@ -1,5 +1,4 @@
 use std::io::stdin;
-
 pub fn insert_beg(mut arr: Vec<i32>) -> Vec<i32> {
     let mut arr2 = arr.clone();
     println!("Enter the value to be insert:");
@@ -13,8 +12,7 @@ pub fn insert_beg(mut arr: Vec<i32>) -> Vec<i32> {
     return arr2;
 }
 
-
-pub fn create_array()->Vec<i32>{
+pub fn create_array() -> Vec<i32> {
     let mut arr: Vec<i32> = vec![];
     println!("Enter the Size of array:");
     let mut size: String = String::new();
@@ -29,11 +27,59 @@ pub fn create_array()->Vec<i32>{
     return arr;
 }
 
-pub fn print_arr(arr:Vec<i32>){
+pub fn print_arr(arr: Vec<i32>) {
     println!("Your array:");
-    for i in arr.iter(){
+    for i in arr.iter() {
         println!("{i}");
     }
 }
 
+pub fn find_max_element(arr: Vec<i32>) -> i32 {
+    let mut temp = arr[0];
+    for i in 0..arr.len() {
+        if temp < arr[i] {
+            temp = arr[i];
+        }
+    }
+    temp
+}
 
+pub fn find_min_element(arr: Vec<i32>) -> i32 {
+    let mut temp = arr[0];
+
+    for i in 0..arr.len() {
+        if temp > arr[i] {
+            temp = arr[i];
+        }
+    }
+    temp
+}
+
+pub fn sum_of_all(arr: Vec<i32>) -> i32 {
+    let mut sum = 0;
+    for i in arr.iter() {
+        sum += i;
+    }
+    sum
+}
+
+pub fn search_element(arr: Vec<i32>, target: i32) -> usize {
+    let mut index = 0usize;
+    for i in 0..arr.len() {
+        if target == arr[i] {
+            index = i + 1;
+            break;
+        }
+    }
+    index
+}
+
+pub fn count_occurence(arr: Vec<i32>, target: i32) -> i32 {
+    let mut count = 0;
+    for i in 0..arr.len() {
+        if arr[i] == target {
+            count += 1
+        }
+    }
+    count
+}
