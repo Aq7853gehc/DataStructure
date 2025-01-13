@@ -83,3 +83,33 @@ pub fn count_occurence(arr: Vec<i32>, target: i32) -> i32 {
     }
     count
 }
+
+pub fn rotate_array(mut arr: Vec<i32>, steps: i32) -> Vec<i32> {
+    for _i in 0..steps {
+        let temp = arr[arr.len() - 1];
+        for j in (1..arr.len()).rev() {
+            arr[j] = arr[j - 1];
+        }
+        arr[0] = temp;
+    }
+    arr
+}
+
+
+pub fn find_second_max_element(arr: Vec<i32>)->i32{
+    let max = find_max_element(arr.clone());
+
+    let mut s_max = arr[0];
+    let mut temp:i32;
+   for i in 0..arr.len(){
+    temp = arr[i];
+    if temp == max{
+        continue;
+    }else {
+        if s_max < arr[i]{
+            s_max = arr[i];
+        }
+    }
+   }
+   s_max
+}
