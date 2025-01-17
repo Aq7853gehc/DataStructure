@@ -2,7 +2,6 @@ pub struct LinkNode {
     val: Option<i32>,
     next: Option<Box<LinkNode>>,
 }
-#[warn(dead_code)]
 impl LinkNode     {
     pub fn new_head()->Self{
         LinkNode{

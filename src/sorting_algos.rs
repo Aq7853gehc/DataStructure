@@ -109,16 +109,51 @@ pub fn counting_sort(arr: &mut [i32]) {
 }
 
 #[allow(dead_code)]
-pub fn merge_sort(arr: &mut [i32]) -> &[i32] {
-    if arr.len() <= 1 {
-        return arr;
+pub fn merge_sort(arr: &mut [i32]) {
+    let len = arr.len();
+    if len <= 1 {
+        return; 
     }
-    let mid = arr.len() / 2;
-    merge_sort(&mut arr[0..mid]);
-    merge_sort(&mut arr[mid + 1..]);
-    merge(arr, 0, mid, arr.len() - 1)
+
+    let mid = len / 2;
+
+    
+    merge_sort(&mut arr[..mid]);  
+    merge_sort(&mut arr[mid..]);  
+
+    // Merge the two halves together.
+    let mut temp = arr.to_vec();
+    merge(&arr[..mid], &arr[mid..], &mut temp[..]);
+
+    // Copy the sorted temp array back into the original array.
+    arr.copy_from_slice(&temp);
 }
 
-fn merge(arr: &mut [i32], start: usize, mid: usize, end: usize) -> &[i32] {
-    arr
+fn merge(left: &[i32], right: &[i32], result: &mut [i32]) {
+    let mut left_index = 0;
+    let mut right_index = 0;
+    let mut result_index = 0;
+
+    // Merge left and right slices into result.
+    while left_index < left.len() && right_index < right.len() {
+        if left[left_index] <= right[right_index] {
+            result[result_index] = left[left_index];
+            left_index += 1;
+        } else {
+            result[result_index] = right[right_index];
+            right_index += 1;
+        }
+        result_index += 1;
+    }
+
+    // Copy any remaining elements from left slice.
+    if left_index < left.len() {
+        result[result_index..].copy_from_slice(&left[left_index..]);
+    }
+
+    // Copy any remaining elements from right slice.
+    if right_index < right.len() {
+        result[result_index..].copy_from_slice(&right[right_index..]);
+    }
 }
+
