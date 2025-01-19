@@ -62,3 +62,8 @@ pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
 
     result
 }
+
+#[allow(dead_code)]
+pub fn merge(num1: &mut Vec<i32>, m: i32, num2: &mut Vec<i32>, n: i32) {
+    
+}

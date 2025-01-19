@@ -2,20 +2,23 @@ pub struct LinkNode {
     val: Option<i32>,
     next: Option<Box<LinkNode>>,
 }
-impl LinkNode     {
-    pub fn new_head()->Self{
-        LinkNode{
-            val:None,
-            next:None}
+
+impl LinkNode {
+    pub fn new_head() -> Self {
+        LinkNode {
+            val: None,
+            next: None,
+        }
     }
-    pub fn new(data:i32) -> Self {
+
+    fn new(data: i32) -> Self {
         LinkNode {
             val: Some(data),
             next: None,
         }
     }
 
-    pub fn add_node(&mut self, data: i32 ) {
+    pub fn push(&mut self, data: i32) {
         let mut current = self;
         while let Some(ref mut next_node) = current.next {
             current = next_node;
@@ -31,11 +34,15 @@ impl LinkNode     {
         }
     }
 
-    pub fn add_beg(&mut self, data:i32){
-        let mut node_b = LinkNode::new(data);
-        node_b.next = self.next.take();
-        self.next  = Some(Box::new(node_b));
+    pub fn pop(&mut self) -> Option<i32> {
+        if self.next.is_none() {
+            self.val.take()
+        } else {
+            let mut current = self;
+            while current.next.as_ref().unwrap().next.is_some() {
+                current = current.next.as_mut().unwrap()
+            }
+            current.next.take().unwrap().val
+        }
     }
-
-   
 }
