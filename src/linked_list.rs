@@ -3,7 +3,7 @@ pub struct LinkNode {
     next: Option<Box<LinkNode>>,
 }
 
-impl LinkNode {
+impl LinkNode { 
     pub fn new_head() -> Self {
         LinkNode {
             val: None,
